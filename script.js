@@ -90,9 +90,13 @@ function keyboardInput(e) {
     "/",
     "=",
     "Backspace",
+    "Enter",
   ];
   if (goodKeys.includes(e.key)) {
-    let targetBtn = document.querySelector(`button[data-key='${e.key}']`);
+    let targetBtn =
+      e.key === "Enter"
+        ? document.querySelector(`button[data-key='=']`)
+        : document.querySelector(`button[data-key='${e.key}']`);
     targetBtn.click();
   }
 }

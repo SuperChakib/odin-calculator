@@ -73,6 +73,10 @@ button.digit {
   background-color: beige;
 }
 
+button:hover {
+  background-color: burlywood;
+}
+
 button:active {
   background-color: royalblue;
   box-shadow: -2px -2px black;
