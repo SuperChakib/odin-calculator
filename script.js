@@ -16,7 +16,9 @@ const operate = (operator, num1, num2) => {
       return Math.round(divide(num1, num2) * 1000) / 1000;
   }
 };
-let display = document.querySelector("#display>p");
+let display = document.querySelector("#result");
+let displayCache = document.querySelector("#subDisplayA");
+let displayOperator = document.querySelector("#subDisplayB");
 let inputNb = "";
 let cacheNb = "";
 let digits = document.querySelectorAll(".digit");
@@ -38,17 +40,21 @@ function chooseOperator(e) {
   if (!cacheNb) cacheNb = inputNb;
   inputNb = "";
   if (cacheNb) operator = e.target.textContent;
-  if (!cacheNb && e.target.textContent === "-") inputNb = "-";
+  displayCache.textContent = cacheNb;
+  displayOperator.textContent = operator;
+  display.textContent = "";
 }
 function enterOperation() {
   if (cacheNb && operator && inputNb) {
-    if (operator === "/" && inputNb === 0) {
+    if (operator === "/" && inputNb === "0") {
       inputNb = "";
       display.textContent = "Hey! You can't divide by 0!";
     } else {
       inputNb = String(operate(operator, cacheNb, inputNb));
       display.textContent = inputNb;
     }
+    displayCache.textContent = "";
+    displayOperator.textContent = "";
     cacheNb = "";
     operator = "";
   }
@@ -58,6 +64,8 @@ function clearOperation() {
   operator = "";
   inputNb = "";
   display.textContent = 0;
+  displayCache.textContent = "";
+  displayOperator.textContent = "";
 }
 function correctoperation() {
   inputNb = inputNb.slice(0, inputNb.length - 1);
@@ -90,7 +98,7 @@ function keyboardInput(e) {
 }
 function changeSign() {
   if (inputNb[0] === "-") inputNb = inputNb.slice(1);
-  else inputNb = "-" + inputNb;
+  else if (inputNb) inputNb = "-" + inputNb;
   display.textContent = inputNb;
 }
 digits.forEach((digit) => digit.addEventListener("click", inputValue));

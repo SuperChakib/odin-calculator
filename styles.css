@@ -30,12 +30,19 @@ body {
   margin: 20px 20px 0;
   width: 90%;
   flex: 1;
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: flex-end;
+  gap: 2px;
+  text-align: right;
 }
 #display > p {
-  margin: 10px;
+  margin: 5px;
+}
+#tempOpe {
+  height: 40%;
+}
+#result {
+  height: 40%;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 #buttons {
@@ -64,4 +71,9 @@ button {
 
 button.digit {
   background-color: beige;
+}
+
+button:active {
+  background-color: royalblue;
+  box-shadow: -2px -2px black;
 }
