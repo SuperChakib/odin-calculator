@@ -26,9 +26,10 @@ let enterBtn = document.querySelector("#enter");
 let clearBtn = document.querySelector("#clear");
 let floatBtn = document.querySelector("#float");
 let backBtn = document.querySelector("#backspace");
+let signBtn = document.querySelector("#sign");
 function inputValue(e) {
   if (e.target.textContent === "." && inputNb.includes(".")) return;
-  inputNb = inputNb.concat(e.target.textContent);
+  inputNb = inputNb.concat(e.target.getAttribute("data-key"));
   display.textContent = inputNb;
 }
 function chooseOperator(e) {
@@ -37,6 +38,7 @@ function chooseOperator(e) {
   if (!cacheNb) cacheNb = inputNb;
   inputNb = "";
   if (cacheNb) operator = e.target.textContent;
+  if (!cacheNb && e.target.textContent === "-") inputNb = "-";
 }
 function enterOperation() {
   if (cacheNb && operator && inputNb) {
@@ -61,6 +63,36 @@ function correctoperation() {
   inputNb = inputNb.slice(0, inputNb.length - 1);
   display.textContent = inputNb;
 }
+function keyboardInput(e) {
+  let goodKeys = [
+    ".",
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "+",
+    "-",
+    "*",
+    "/",
+    "=",
+    "Backspace",
+  ];
+  if (goodKeys.includes(e.key)) {
+    let targetBtn = document.querySelector(`button[data-key='${e.key}']`);
+    targetBtn.click();
+  }
+}
+function changeSign() {
+  if (inputNb[0] === "-") inputNb = inputNb.slice(1);
+  else inputNb = "-" + inputNb;
+  display.textContent = inputNb;
+}
 digits.forEach((digit) => digit.addEventListener("click", inputValue));
 operators.forEach((operator) =>
   operator.addEventListener("click", chooseOperator)
@@ -68,3 +100,5 @@ operators.forEach((operator) =>
 enterBtn.addEventListener("click", enterOperation);
 clearBtn.addEventListener("click", clearOperation);
 backBtn.addEventListener("click", correctoperation);
+window.addEventListener("keyup", keyboardInput);
+signBtn.addEventListener("click", changeSign);

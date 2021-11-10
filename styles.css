@@ -1,3 +1,7 @@
+* {
+  font-family: monospace;
+}
+
 body {
   background-color: royalblue;
   height: 100vh;
@@ -41,7 +45,7 @@ body {
   display: flex;
   flex-flow: row wrap-reverse;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
   gap: 20px;
 }
 
